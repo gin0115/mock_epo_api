@@ -43,7 +43,7 @@ class RestDBClient
     {
         return new Client([
             'base_uri' => $_ENV['RESTDB_URL'],
-            'debug' => true,
+            'debug' => $_ENV['GUZZLE_DEBUG'] === 'true',
             'headers' => [
                 'cache-control' => 'no-cache',
                 'x-apikey' => $_ENV['RESTDB_KEY'],
