@@ -1,0 +1,22 @@
+{
+    "folders": [
+        {
+            "path": "../../.."
+        }
+    ],
+    "settings": {
+        "powermode.enabled": false,
+        "phpcs.enable": true,
+        "phpcbf.enable": true,
+        "phpcs.executablePath": "/usr/bin/phpcs",
+        "phpcs.standard": "PSR12",
+        "phpcs.showWarnings": true,
+        "phpcs.showSources": true,
+        "phpcbf.executablePath": "/usr/bin/phpcbf",
+        "phpcbf.documentFormattingProvider": true,
+        "phpcbf.standard": "PSR12",
+        "[php]": {
+            "editor.defaultFormatter": "persoderlind.vscode-phpcbf"
+        },
+    }
+}
