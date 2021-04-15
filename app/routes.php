@@ -8,6 +8,7 @@ use App\Application\Actions\User\ListUsersAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Actions\Category\ListCategoryAction;
+use App\Application\Actions\Category\ViewCategoryAction;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
@@ -28,5 +29,6 @@ return function (App $app) {
 
     $app->group('/categories', function (Group $group) {
         $group->get('', ListCategoryAction::class);
+        $group->get('/{id}', ViewCategoryAction::class);
     });
 };

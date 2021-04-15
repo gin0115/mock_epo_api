@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Category;
 
+use stdClass;
 use GuzzleHttp\Client;
 use Psr\Log\LoggerInterface;
 use App\Domain\Category\Category;
@@ -49,10 +50,26 @@ class CategoryRespoitory
 
     /**
      * @param int $id
-     * @return Category
+     * @return stdClass|null
      * @throws CategoryNotFoundException
      */
-    public function findCategoryOfId(int $id): Category
+    public function findCategoryOfId(int $id): ?stdClass
     {
+        $body = (string) $this->client->get("categories", ['query' =>  ['q' => json_encode(['id' => $id])]])->getBody();
+       
+         // Return empty array if no body
+        if (\mb_strlen($body) === 0) {
+            $this->logger->error("Category with id of {$id} not found in restDB");
+            return null;
+        }
+
+        try {
+            $categories = json_decode($body);
+        } catch (\Throwable $th) {
+            $this->logger->error("Invalid JSON paypload for categories (find id of {$id}) when querying restDB");
+            return null;
+        }
+        
+        return count($categories) > 0 ? $categories[0] : null;
     }
 }
