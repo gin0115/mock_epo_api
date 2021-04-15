@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Dotenv\Dotenv;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use App\Application\Handlers\ShutdownHandler;
@@ -11,6 +12,10 @@ use App\Application\Settings\SettingsInterface;
 use App\Application\ResponseEmitter\ResponseEmitter;
 
 require __DIR__ . '/../vendor/autoload.php';
+
+// Include all env's
+$dotenv = Dotenv::createImmutable(dirname(__DIR__,1));
+$dotenv->load();
 
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
